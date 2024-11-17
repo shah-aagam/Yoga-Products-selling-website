@@ -1,101 +1,76 @@
+import Link from "next/link";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+    {/* Hero Section */}
+    <section className="relative bg-cover bg-center h-96 flex items-center justify-center text-center text-white" style={{ backgroundImage: "url('/yoga-banner.jpg')" }}>
+  <div className="bg-teal-700 bg-opacity-60 p-6 rounded-lg">
+    <h1 className="text-4xl font-bold mb-2">Transform Your Yoga Journey with Smart Products</h1>
+    <p className="text-xl mb-4">Revolutionize your practice with advanced technology that helps you improve and track your yoga routine.</p>
+    <Link href="/products" className="px-8 py-3 bg-teal-800 rounded-lg text-xl font-semibold hover:bg-teal-600 transition-all duration-300 ease-in-out">Shop Now</Link>
+  </div>
+</section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+  {/* Benefits Section */}
+  <section className="py-16 px-6 text-center">
+    <h2 className="text-3xl font-bold mb-8">Why Choose Smart Yoga Products?</h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div className="flex flex-col items-center">
+        <Image src="/track-icon.svg" alt="Track Progress" width={60} height={60} />
+        <h3 className="text-xl font-semibold mt-4">Track Your Progress</h3>
+        <p>Measure flexibility, balance, and strength improvements over time.</p>
+      </div>
+      <div className="flex flex-col items-center">
+        <Image src="/personalize-icon.svg" alt="Personalized Recommendations" width={60} height={60} />
+        <h3 className="text-xl font-semibold mt-4">Personalized Recommendations</h3>
+        <p>Get tailored tips and guidance based on your performance.</p>
+      </div>
+      <div className="flex flex-col items-center">
+        <Image src="/feedback-icon.svg" alt="Real-Time Feedback" width={60} height={60} />
+        <h3 className="text-xl font-semibold mt-4">Real-Time Feedback</h3>
+        <p>Instant feedback and suggestions to improve your practice.</p>
+      </div>
+      <div className="flex flex-col items-center">
+        <Image src="/eco-icon.svg" alt="Sustainable & Eco-Friendly" width={60} height={60} />
+        <h3 className="text-xl font-semibold mt-4">Sustainable & Eco-Friendly</h3>
+        <p>Our products are designed with sustainability in mind.</p>
+      </div>
     </div>
+  </section>
+  
+
+  {/* Featured Products Section */}
+  <section className="py-16 px-6 bg-gray-50 text-center">
+    <h2 className="text-3xl font-bold mb-8">Featured Products</h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+      {/* Example Product */}
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+        <Image src="/product1.jpg" alt="Smart Yoga Mat" width={300} height={200} className="mb-4" />
+        <h3 className="text-xl font-semibold">Smart Yoga Mat</h3>
+        <p className="mb-4">Track your poses and alignment in real time.</p>
+        <Link href="/products/1" className="px-4 py-2 bg-teal-700 rounded-lg text-white">Shop Now</Link>
+      </div>
+      {/* Add more products here */}
+    </div>
+    <Link href="/products" className="text-teal-700 mt-6 inline-block">View All Products</Link>
+  </section>
+
+
+  <section className="py-16 px-6 text-center bg-teal-500 text-white">
+    <h2 className="text-3xl font-bold mb-8">What Our Customers Say</h2>
+    <div className="flex justify-center gap-8">
+      <div className="w-80">
+        <p>"The SmartAsana mat helped me improve my posture in just a few weeks!"</p>
+        <p className="font-semibold mt-2">- John Doe</p>
+      </div>
+      <div className="w-80">
+        <p>"I love the personalized feedback. It makes my yoga sessions so much better."</p>
+        <p className="font-semibold mt-2">- Jane Smith</p>
+      </div>
+    </div>
+  </section>
+  </>
   );
 }
