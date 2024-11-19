@@ -84,7 +84,7 @@ const Login = () => {
         </p>
         <p className=" text-sm text-gray-600">
           Login as 
-          <Link href="/admin/login" className='text-blue-600 cursor-pointer'> Admin</Link>
+          <Link href="/admin/login" className='text-blue-600 cursor-pointer no-underline '> Admin</Link>
         </p>
       </div>
     </section>

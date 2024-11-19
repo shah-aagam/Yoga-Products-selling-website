@@ -19,6 +19,39 @@ export async function GET() {
   const products = await Product.find();
   return NextResponse.json(products);
   }catch(error){
-    console.log(error)
+    return NextResponse.json(
+      { error: "Failed to fetch products" },
+      { status: 500 }
+    );
   }
+}
+
+// Update a product (PUT)
+export async function PUT(req) {
+  const { id, name, description, price, stock, imageUrl } = await req.json();
+
+  const updatedProduct = await Product.findByIdAndUpdate(
+    id,
+    { name, description, price, stock, imageUrl },
+    { new: true }
+  );
+
+  if (!updatedProduct) {
+    return NextResponse.json({ error: 'Product not found!' }, { status: 404 });
+  }
+
+  return NextResponse.json({ message: 'Product updated successfully!', updatedProduct });
+}
+
+// Delete a product (DELETE)
+export async function DELETE(req) {
+  const { id } = await req.json();
+
+  const deletedProduct = await Product.findByIdAndDelete(id);
+
+  if (!deletedProduct) {
+    return NextResponse.json({ error: 'Product not found!' }, { status: 404 });
+  }
+
+  return NextResponse.json({ message: 'Product deleted successfully!' });
 }
