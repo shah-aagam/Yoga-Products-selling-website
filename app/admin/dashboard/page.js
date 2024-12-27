@@ -1,6 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'
+import { toast } from "react-toastify";
 
 export default function AdminDashboard() {
   const [products, setProducts] = useState([]);
@@ -70,6 +73,25 @@ export default function AdminDashboard() {
       setForm({ id: '', name: '', description: '', price: '', stock: '', imageUrl: '' });
       setIsEdit(false);
       setShowProductModal(false);
+      if( method == 'POST' ){
+      toast.success('New Product added successfully!', {
+        theme: "colored",
+        autoClose: 2000,
+        position: 'top-center',
+        style: {
+          marginTop: "3rem",
+        },
+      });
+      }else{
+        toast.success('Product information updated successfully!', {
+          theme: "colored",
+          autoClose: 2000,
+          position: 'top-center',
+          style: {
+            marginTop: "3rem",
+          },
+        });
+      }
     }
   };
 
@@ -109,6 +131,14 @@ export default function AdminDashboard() {
       fetchBlogs();
       setBlogForm({ title: '', description: '', imageUrl: '' });
       setShowBlogModal(false);
+      toast.success('New Blog added successfully!', {
+        theme: "colored",
+        autoClose: 2000,
+        position: 'top-center',
+        style: {
+          marginTop: "3rem",
+        },
+      });
     }
   };
 
@@ -118,6 +148,14 @@ export default function AdminDashboard() {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id }),
+    });
+    toast.error('!! Product deleted !!', {
+      theme: "colored",
+      autoClose: 2000,
+      position: 'top-center',
+      // style: {
+      //   marginTop: "3rem",
+      // },
     });
     fetchProducts();
   };
@@ -129,6 +167,14 @@ export default function AdminDashboard() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id }),
     });
+    toast.error('!! Blog deleted !!', {
+      theme: "colored",
+      autoClose: 2000,
+      position: 'top-center',
+      // style: {
+      //   marginTop: "3rem",
+      // },
+    });
     fetchBlogs();
   };
 
@@ -139,6 +185,12 @@ export default function AdminDashboard() {
     }
   }
 
+  const truncateText = (text , maxLength) => {
+      if(text.length > maxLength){
+         return text.substring(0,maxLength) + '...'
+      }
+      return text + "..."
+  }
 
   return (
     <div className="container mx-auto p-4">
@@ -173,23 +225,16 @@ export default function AdminDashboard() {
 
         {/* Product Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {products
-            .filter((product) =>
+          { products.length > 0 ? 
+          products.filter((product) =>
               product.name.toLowerCase().includes(searchTerm.toLowerCase())
             )
             .map((product) => (
-              <div
-                key={product._id}
-                className="border rounded-lg p-4 shadow-md flex flex-col min-h-64"
-              >
-                <img
-                  src={product.imageUrl}
-                  alt={product.name}
-                  className="w-full h-32 object-cover rounded-md"
-                />
+              <div key={product._id} className="border rounded-lg p-4 shadow-md flex flex-col min-h-64">
+                <img src={product.imageUrl} alt={product.name} className="w-full h-48 object-cover rounded-md"/>
                 <h3 className="text-lg font-bold mt-2">{product.name}</h3>
                 <p className="text-sm text-gray-500 flex-grow">
-                  {product.description}
+                  {truncateText(product.description , 50 )}
                 </p>
                 <div className="flex justify-between items-center mt-2">
                   <span className="text-teal-600 font-semibold">
@@ -198,21 +243,31 @@ export default function AdminDashboard() {
                   <span className="text-gray-600">Stock: {product.stock}</span>
                 </div>
                 <div className="flex justify-between mt-4">
-                  <button
-                    onClick={() => handleEdit(product)}
-                    className="bg-blue-500 text-white px-3 py-1 rounded-md"
-                  >
+                  <button onClick={() => handleEdit(product)} className="bg-blue-500 text-white px-3 py-1 rounded-md">
                     Edit
                   </button>
-                  <button
-                    onClick={() => handleProductDelete(product._id)}
-                    className="bg-red-500 text-white px-3 py-1 rounded-md"
-                  >
+                  <button onClick={() => handleProductDelete(product._id)} className="bg-red-500 text-white px-3 py-1 rounded-md">
                     Delete
                   </button>
                 </div>
               </div>
-            ))}
+            )):(
+              Array.from({ length : 3 }).map((_,index) => (
+               <div key={index} className="border rounded-lg p-4 shadow-md flex flex-col min-h-64">
+                <Skeleton width={350} height={200} className="rounded-md"/>
+                <Skeleton  width={150} height={20} className="text-lg font-bold mt-2" />
+                <Skeleton width={300} height={15} />
+                <div className="flex justify-between items-center mt-2">
+                  <Skeleton width={75}  height={20}/>
+                  <Skeleton width={75}  height={20}/>
+                </div>
+                <div className="flex justify-between mt-4">
+                  <Skeleton width={75} height={25} />
+                  <Skeleton width={75} height={25} />
+                </div>
+               </div>
+              )))
+          }
         </div>
       </div>
 
@@ -239,8 +294,8 @@ export default function AdminDashboard() {
 
         {/* Blog List */}
         <ul className="space-y-6 mt-6">
-          {blogs
-            .filter((blog) =>
+          { blogs.length > 0 ?
+          blogs.filter((blog) =>
               blog.title.toLowerCase().includes(blogSearchTerm.toLowerCase())
             )
             .map((blog) => (
@@ -253,7 +308,7 @@ export default function AdminDashboard() {
                   <img
                     src={blog.imageurl}
                     alt={blog.title}
-                    className="w-full h-48 object-cover rounded-md transition-opacity duration-300 hover:opacity-80"
+                    className="w-full h-60 !object-cover rounded-md transition-opacity duration-300 hover:opacity-80"
                   />
                   <p className="mt-2 text-sm text-gray-500">
                     Date: <span className="italic">16/11/2024</span>
@@ -279,7 +334,28 @@ export default function AdminDashboard() {
                   </div>
                 </div>
               </li>
-            ))}
+            )):(
+              Array.from({ length : 2}).map((_,index) => (
+                <li key={index} className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row gap-6 p-6">
+                {/* Image Section */}
+                <div className="md:w-1/3">
+                  <Skeleton height={200} className="w-full rounded-md"
+                  />
+                  <Skeleton width={150} height={20} className="mt-2" />
+                </div>
+
+                {/* Content Section */}
+                <div className="md:w-2/3 flex flex-col">
+                  <Skeleton width={150} height={30} className="mb-3" />
+                  <Skeleton count={4} width={400} height={20} className="mb-4 flex-grow"/>
+                  {/* Delete Button */}
+                  <div className="flex justify-end">
+                    <Skeleton width={150} height={35} className="px-4 py-2 rounded-md"/>
+                  </div>
+                </div>
+              </li>
+              ))
+            )}
         </ul>
       </div>
 

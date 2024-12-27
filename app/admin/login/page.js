@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation"; 
 import Head from "next/head";
+import { toast } from "react-toastify";
 
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
@@ -36,8 +37,24 @@ const AdminLogin = () => {
         window.dispatchEvent(new Event('storage'));
 
         router.push("/admin/dashboard");
+        toast.success('Admin logged in successfully!', {
+          theme: "colored",
+          autoClose: 2000,
+          position: 'top-center',
+          style: {
+            marginTop: "3rem",
+          },
+        });
       } else {
-        setError(data.message || "Login failed");
+        // setError(data.message || "Login failed");
+        toast.error(data.message || 'An error occurred', {
+          theme: "colored",
+          autoClose: 2000,
+          position: 'top-center',
+          style: {
+            marginTop: "3rem",
+          },
+        });
       }
     } catch (err) {
       setError("Something went wrong. Please try again later.");
@@ -51,11 +68,15 @@ const AdminLogin = () => {
       <Head>
         <title>Admin Login</title>
       </Head>
-      <div className="min-h-screen flex justify-center items-center bg-gray-100">
+      <div className="min-h-screen flex justify-center items-center flex-col bg-gray-100 gap-4">
+      <div className='flex justify-center items-center gap-2 '>
+          <img src="/logo.svg" alt="SmartAsana" className=' w-16 border border-black rounded-full' />
+          <p className='text-3xl font-bold pt-2'>SmartAsana</p>
+      </div>
         <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-md">
           <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">Admin Login</h2>
 
-          {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+          {error && <p className="text-red-500 font-medium text-center mb-4">{error}</p>}
 
           <form onSubmit={handleLogin}>
             <div className="mb-4">
@@ -65,6 +86,7 @@ const AdminLogin = () => {
               <input
                 type="email"
                 id="email"
+                placeholder="Enter your email id"
                 name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -79,6 +101,7 @@ const AdminLogin = () => {
               </label>
               <input
                 type="password"
+                placeholder="Enter your pasword"
                 id="password"
                 name="password"
                 value={password}

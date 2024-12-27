@@ -96,7 +96,7 @@ const Navbar = () => {
                 className="w-10 h-10 flex items-center justify-center no-underline text-black"
                 >
                 <Image
-                  src="/cart.svg"
+                  src="/NavCart.svg"
                   className=""
                   width={20}
                   height={20}

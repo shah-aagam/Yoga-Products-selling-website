@@ -4,8 +4,8 @@ import Product from "@/models/Product";
 
 export async function GET(req, { params }) {
     await connectMongo();
-
-  const { id } = params;
+    
+  const { id } = await params;
 
   try {
     const product = await Product.findById(id);

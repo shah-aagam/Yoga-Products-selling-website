@@ -4,6 +4,8 @@ import Footer from "@/components/Footer"
 import './globals.css'
 import Head from "next/head";
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,6 +33,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased font-roboto min-h-screen`}
       >
         <Navbar />
+        <ToastContainer position="top-center" className="custom-toast-container"/>
         {children}
         <Footer />
       </body>
