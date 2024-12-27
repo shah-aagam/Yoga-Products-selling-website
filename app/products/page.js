@@ -12,7 +12,7 @@ const ProductListing = () => {
 
 
   const fetchProducts = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
+  const res = await fetch('https://yoga-products-selling-website-h396.vercel.app//api/products', {
     cache: "no-store",
   });
   const data = await res.json();
@@ -21,7 +21,7 @@ const ProductListing = () => {
 
    const fetchBestSellers = async () => {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/bestsellers`,
+      'https://yoga-products-selling-website-h396.vercel.app//api/products/bestsellers',
       { cache: "no-store" }
     );
 

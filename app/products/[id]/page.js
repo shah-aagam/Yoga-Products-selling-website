@@ -97,7 +97,7 @@ const ProductDetail = ({ params: paramsPromise }) => {
       if (!params?.id) return;
 
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${params.id}`, {
+        const res = await fetch('https://yoga-products-selling-website-h396.vercel.app//api/products/${params.id}', {
           cache: "no-store",
         });
 
