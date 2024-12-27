@@ -6,7 +6,7 @@ import moment from 'moment'
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css'
 
-const blogs = () => {
+const Blogs = () => {
 
    const [ blogs , setBlogs ] = useState([])
 
@@ -38,7 +38,7 @@ const blogs = () => {
 
    useEffect(() => {
      fetchBlogs()
-   }, [])
+   }, [fetchBlogs])
    
 
   return (
@@ -109,4 +109,4 @@ const blogs = () => {
   );
 };
 
-export default blogs
+export default Blogs
